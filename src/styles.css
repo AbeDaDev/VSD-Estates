@@ -289,6 +289,13 @@ nav.scrolled {
   transition: opacity 0.3s, gap 0.3s;
 }
 
+.btn-chat {
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
 .btn-ghost:hover {
   opacity: 1;
   gap: 16px;
@@ -799,7 +806,7 @@ footer {
   border-top: 1px solid var(--border);
   padding-top: 28px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
 }
 
@@ -807,11 +814,19 @@ footer {
   font-size: 0.6rem;
   letter-spacing: 0.12em;
   color: rgba(138, 127, 114, 0.5);
+  text-align: center;
+  width: 100%;
 }
 
 .footer-social {
   display: flex;
   gap: 20px;
+}
+
+.footer-social-inline {
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 6px;
 }
 
 .footer-social a {

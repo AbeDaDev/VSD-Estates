@@ -166,6 +166,7 @@ function useRevealAndCounters() {
 }
 
 export default function App() {
+  const [isChatOpen, setIsChatOpen] = useState(false);
   const { navScrolled, counts, revealRefs, statRefs } = useRevealAndCounters();
   const cursorRef = useRef(null);
   const cursorRingRef = useRef(null);
@@ -243,7 +244,7 @@ export default function App() {
             </p>
             <div className="hero-actions">
               <a href="#properties" className="btn-primary">Explore Listings</a>
-              <a href="#about" className="btn-ghost">Our Story</a>
+              <button type="button" className="btn-ghost btn-chat" onClick={() => setIsChatOpen(true)}>Talk to Victor</button>
             </div>
           </div>
           <div className="scroll-indicator">
@@ -404,20 +405,22 @@ export default function App() {
               <a href="tel:+19095324251">909 532 4251</a>
               <br />
               <a href="mailto:hello@vsdestates.com">hello@vsdestates.com</a>
+              <br />
+              <br />
+              <span className="footer-social footer-social-inline">
+                <a href="https://www.instagram.com/realestatewitvic?igsh=NTc4MTIwNjQ2YQ%3D%3D" target="_blank" rel="noreferrer">Instagram</a>
+                <a href="https://www.linkedin.com/in/victor-serna-delgado-3a7073371/" target="_blank" rel="noreferrer">LinkedIn</a>
+                <a href="https://www.tiktok.com/@realestatewitvic?_t=ZT-8uzEIw4LmN4&_r=1" target="_blank" rel="noreferrer">TikTok</a>
+              </span>
             </p>
           </div>
         </div>
         <div className="footer-bottom">
           <span className="footer-copy">© 2026 VSD Estates. All rights reserved.</span>
-          <div className="footer-social">
-            <a href="https://www.instagram.com/realestatewitvic?igsh=NTc4MTIwNjQ2YQ%3D%3D" target="_blank" rel="noreferrer">Instagram</a>
-            <a href="https://www.linkedin.com/in/victor-serna-delgado-3a7073371/" target="_blank" rel="noreferrer">LinkedIn</a>
-            <a href="https://www.tiktok.com/@realestatewitvic?_t=ZT-8uzEIw4LmN4&_r=1" target="_blank" rel="noreferrer">TikTok</a>
-          </div>
         </div>
       </footer>
 
-      <RealEstateAIChat />
+      <RealEstateAIChat isOpen={isChatOpen} setIsOpen={setIsChatOpen} />
     </>
   );
 }

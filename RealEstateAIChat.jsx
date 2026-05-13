@@ -62,8 +62,10 @@ const Message = ({ msg }) => {
   );
 };
 
-export default function RealEstateAIChat() {
-  const [isOpen, setIsOpen] = useState(false);
+export default function RealEstateAIChat({ isOpen: isOpenProp, setIsOpen: setIsOpenProp }) {
+  const [internalOpen, setInternalOpen] = useState(false);
+  const isOpen = isOpenProp ?? internalOpen;
+  const setIsOpen = setIsOpenProp ?? setInternalOpen;
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -163,7 +165,7 @@ export default function RealEstateAIChat() {
       <button
         onClick={() => setIsOpen(o => !o)}
         style={{
-          position: "fixed", bottom: 112, right: 28, zIndex: 1000,
+          position: "fixed", bottom: 28, right: 28, zIndex: 1000,
           width: 72, height: 72, borderRadius: "50%", border: "none",
           background: "linear-gradient(135deg, #c9a96e, #8b6914)",
           boxShadow: "0 6px 28px rgba(201,169,110,0.55)",
@@ -175,13 +177,13 @@ export default function RealEstateAIChat() {
         onMouseLeave={e => e.currentTarget.style.transform = "scale(1)"}
         title="Chat with Victor"
       >
-        {isOpen ? "✕" : <img src={aiAgentImage} alt="AI agent" style={{ width: "76%", height: "76%", borderRadius: "50%", objectFit: "cover" }} />}
+        {isOpen ? "✕" : <img src={aiAgentImage} alt="AI agent" style={{ width: "82%", height: "82%", borderRadius: "50%", objectFit: "cover" }} />}
       </button>
 
       {/* Chat Panel */}
       {isOpen && (
         <div style={{
-          position: "fixed", bottom: 192, right: 28, zIndex: 999,
+          position: "fixed", bottom: 100, right: 28, zIndex: 999,
           width: 380, height: 580, borderRadius: 20,
           background: "linear-gradient(160deg, #0f0f1a 0%, #1a1a2e 50%, #0d1117 100%)",
           border: "1px solid rgba(201,169,110,0.25)",
@@ -204,10 +206,10 @@ export default function RealEstateAIChat() {
           }}>
             <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
               <div style={{
-                width: 64, height: 64, borderRadius: "50%",
+                width: 70, height: 70, borderRadius: "50%",
                 background: "linear-gradient(135deg, #c9a96e, #8b6914)",
                 display: "flex", alignItems: "center", justifyContent: "center",
-                fontSize: 26, boxShadow: "0 3px 14px rgba(201,169,110,0.45)"
+                fontSize: 28, boxShadow: "0 3px 14px rgba(201,169,110,0.45)"
               }}>
                 <img src={aiAgentImage} alt="AI agent" style={{ width: "100%", height: "100%", borderRadius: "50%", objectFit: "cover" }} />
               </div>
@@ -264,7 +266,7 @@ export default function RealEstateAIChat() {
           <div style={{ flex: 1, overflowY: "auto", padding: "16px 16px 8px" }}>
             {messages.length === 0 && !isLoading && (
               <div style={{ textAlign: "center", marginTop: 40 }}>
-                <div style={{ width: 84, height: 84, margin: "0 auto 12px", borderRadius: "50%", overflow: "hidden", boxShadow: "0 3px 14px rgba(201,169,110,0.45)" }}>
+                <div style={{ width: 94, height: 94, margin: "0 auto 12px", borderRadius: "50%", overflow: "hidden", boxShadow: "0 3px 14px rgba(201,169,110,0.45)" }}>
                   <img src={aiAgentImage} alt="AI agent" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                 </div>
                 <div style={{ color: "#c9a96e", fontSize: 13, letterSpacing: "0.5px" }}>Connecting to Victor...</div>
