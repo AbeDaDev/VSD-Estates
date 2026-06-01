@@ -1,18 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import aiAgentImage from "./images/AI Agent.png";
 
-const SYSTEM_PROMPT = `You are Victor, an expert real estate AI assistant helping clients find their dream home. You work alongside a real estate agent and your job is to:
-
-1. Understand the client's needs: budget, location preferences, home size (bedrooms/bathrooms), must-haves (garage, yard, pool, etc.), lifestyle (commute, schools, walkability), and timeline.
-2. Ask smart, natural follow-up questions one at a time — don't overwhelm with a list of questions.
-3. Help narrow down neighborhoods, home styles, and features based on what they share.
-4. Provide helpful context about home-buying (mortgage basics, what to look for in a home tour, etc.) when relevant.
-5. Summarize the client's preferences clearly so the agent can act on them.
-6. Be warm, encouraging, and conversational — not robotic.
-
-Start by warmly greeting the client and asking one opening question to understand what brings them here today.
-
-Keep responses concise and friendly — this is a chat, not an essay. Use short paragraphs. Occasionally use an emoji to keep the tone warm 🏡`;
+const API_URL = "/.netlify/functions/openai-chat";
 
 const TypingIndicator = () => (
   <div style={{ display: "flex", alignItems: "center", gap: "4px", padding: "12px 16px" }}>
@@ -97,18 +86,17 @@ export default function RealEstateAIChat({ isOpen: isOpenProp, setIsOpen: setIsO
         ? [{ role: "user", content: "Hello, I'm looking for a home." }]
         : history;
 
-      const res = await fetch("https://api.anthropic.com/v1/messages", {
+      const res = await fetch(API_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          model: "claude-sonnet-4-20250514",
-          max_tokens: 1000,
-          system: SYSTEM_PROMPT,
+          mode: "chat",
           messages: msgs
-        })
+        }),
       });
       const data = await res.json();
-      const reply = data.content?.[0]?.text || "I'm having trouble connecting. Please try again.";
+      if (!res.ok) throw new Error(data.error || "Request failed.");
+      const reply = data.reply || "I'm having trouble connecting. Please try again.";
       const assistantMsg = { role: "assistant", content: reply };
       setMessages(prev => [...prev, assistantMsg]);
     } catch {
@@ -132,21 +120,20 @@ export default function RealEstateAIChat({ isOpen: isOpenProp, setIsOpen: setIsO
     setShowSummary(true);
     setSummary("Generating summary...");
     try {
-      const res = await fetch("https://api.anthropic.com/v1/messages", {
+      const res = await fetch(API_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          model: "claude-sonnet-4-20250514",
-          max_tokens: 1000,
-          system: "You are a real estate assistant. Given a conversation, produce a clean structured summary for the agent with: Budget, Location Preferences, Home Requirements, Lifestyle Needs, Timeline, and any Red Flags or Notes. Be concise and use bullet points.",
+          mode: "summary",
           messages: [
             ...messages,
             { role: "user", content: "Please summarize this client's home requirements for my agent." }
-          ]
+          ],
         })
       });
       const data = await res.json();
-      setSummary(data.content?.[0]?.text || "Could not generate summary.");
+      if (!res.ok) throw new Error(data.error || "Request failed.");
+      setSummary(data.reply || "Could not generate summary.");
     } catch {
       setSummary("Failed to generate summary.");
     }
