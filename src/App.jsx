@@ -78,21 +78,21 @@ const aboutFeatures = [
 const testimonials = [
   {
     quote:
-      "VSD found us our dream home in three weeks. The attention to detail and personal care was unlike anything we had experienced before.",
+      "Corner Stone found us our dream home in three weeks. The attention to detail and personal care was unlike anything we had experienced before.",
     name: "James & Sarah Thornton",
     role: "Purchased in Surrey, 2024",
     img: "https://i.pravatar.cc/80?img=12",
   },
   {
     quote:
-      "Selling our Kensington flat felt daunting, but the VSD team handled everything seamlessly. We achieved well above asking price.",
+      "Selling our Kensington flat felt daunting, but the Corner Stone team handled everything seamlessly. We achieved well above asking price.",
     name: "Catherine Obi",
     role: "Sold in Kensington, 2025",
     img: "https://i.pravatar.cc/80?img=44",
   },
   {
     quote:
-      "I've worked with many estate agents over the years. VSD Estates is in a different league - professional, honest, and genuinely passionate.",
+      "I've worked with many estate agents over the years. Corner Stone Realty Solutions is in a different league - professional, honest, and genuinely passionate.",
     name: "Richard Hargreaves",
     role: "Investor Client since 2019",
     img: "https://i.pravatar.cc/80?img=68",
@@ -218,7 +218,7 @@ export default function App() {
 
       <nav className={navScrolled ? "scrolled" : ""} id="nav">
         <a href="#home" className="nav-logo">
-          VSD <span>Estates</span>
+          Corner Stone <span>Realty Solutions</span>
         </a>
         <ul className="nav-links">
           <li><a href="#properties">Properties</a></li>
@@ -318,15 +318,15 @@ export default function App() {
 
         <section className="about-section" id="about">
           <div className="about-img-wrap reveal" ref={(el) => (revealRefs.current[4] = el)}>
-            <img className="about-img" src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&q=80" alt="VSD Estates office" loading="lazy" />
+            <img className="about-img" src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&q=80" alt="Corner Stone Realty Solutions office" loading="lazy" />
             <div className="about-accent" />
           </div>
           <div className="about-text reveal" ref={(el) => (revealRefs.current[5] = el)}>
-            <div className="section-tag">About VSD Estates</div>
+            <div className="section-tag">About Corner Stone Realty Solutions</div>
             <h2 className="section-title">A Legacy of <em>Excellence</em></h2>
             <div className="divider" />
             <p className="about-body">
-              For nearly two decades, VSD Estates has been the trusted name in luxury property across the UK. We do not just sell houses - we match extraordinary people with extraordinary homes, backed by unrivalled local knowledge and white-glove service at every step.
+              For nearly two decades, Corner Stone Realty Solutions has been the trusted name in luxury property across the UK. We do not just sell houses - we match extraordinary people with extraordinary homes, backed by unrivalled local knowledge and white-glove service at every step.
             </p>
             <div className="about-features">
               {aboutFeatures.map((feature) => (
@@ -381,7 +381,7 @@ export default function App() {
       <footer>
         <div className="footer-grid">
           <div className="footer-brand">
-            <a href="#home" className="nav-logo">VSD <span>Estates</span></a>
+            <a href="#home" className="nav-logo">Corner Stone <span>Realty Solutions</span></a>
             <p>Award-winning luxury estate agents with over 18 years of experience placing discerning buyers and sellers across the United Kingdom.</p>
           </div>
           <div className="footer-col">
@@ -416,7 +416,7 @@ export default function App() {
           </div>
         </div>
         <div className="footer-bottom">
-          <span className="footer-copy">© 2026 VSD Estates. All rights reserved.</span>
+          <span className="footer-copy">© 2026 Corner Stone Realty Solutions. All rights reserved.</span>
         </div>
       </footer>
 
